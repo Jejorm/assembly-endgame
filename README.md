@@ -1,6 +1,6 @@
 # Assembly: Endgame 🚀
 
-¡Bienvenido a **Assembly: Endgame**! Un juego de adivinanza de palabras (estilo Hangman) donde tu misión es salvar al mundo del desarrollo de ser forzado a programar exclusivamente en Assembly. ¿Tenés lo que se necesita para mantener vivos los lenguajes de alto nivel?
+¡Bienvenido a **Assembly: Endgame**! Un juego de adivinanza de palabras (estilo Hangman) donde tu misión es salvar al mundo del desarrollo de ser forzado a programar exclusivamente en Assembly. ¿Tienes lo que se necesita para mantener vivos los lenguajes de alto nivel?
 
 ## 🎯 Propósito del Juego
 
@@ -8,12 +8,12 @@ El objetivo es simple pero vital: adivinar la palabra oculta letra por letra ant
 
 ## 🕹️ Cómo Jugar
 
-1.  **Observá la palabra oculta:** Al iniciar, verás espacios en blanco que representan las letras de la palabra a adivinar.
-2.  **Elegí una letra:** Usá el teclado en pantalla para seleccionar letras.
+1.  **Observa la palabra oculta:** Al iniciar, verás espacios en blanco que representan las letras de la palabra a adivinar.
+2.  **Elige una letra:** Usa el teclado en pantalla para seleccionar letras.
 3.  **Aciertos:** Si la letra está en la palabra, se revelará en su posición correspondiente.
 4.  **Errores:** Si la letra no está, uno de los lenguajes de programación "morirá" y recibirás un mensaje de despedida (¡algunos son muy divertidos!).
-5.  **Victoria:** Adiviná todas las letras antes de perder los 8 lenguajes para ganar y celebrar con un poco de confeti. 🎊
-6.  **Derrota:** Si perdés todos los lenguajes, el juego termina y se revelará la palabra que no pudiste adivinar.
+5.  **Victoria:** Adivina todas las letras antes de perder los 8 lenguajes para ganar y celebrar con un poco de confeti. 🎊
+6.  **Derrota:** Si pierdes todos los lenguajes, el juego termina y se revelará la palabra que no pudiste adivinar.
 
 ## ✨ Características Únicas
 
@@ -68,7 +68,7 @@ Para iniciar el servidor de desarrollo:
 npm run dev
 ```
 
-Una vez ejecutado, abrí tu navegador en la dirección que te indique la terminal (usualmente `http://localhost:5173`) y ¡empezá a jugar!
+Una vez ejecutado, abrí tu navegador en la dirección que te indique la terminal (usualmente `http://localhost:5173`) y ¡empieza a jugar!
 
 ---
 *Desarrollado con pasión, React y muchas ganas de no terminar programando en Assembly.* 💻✨
