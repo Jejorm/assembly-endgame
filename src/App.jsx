@@ -5,18 +5,19 @@ import { getFarewellText, getRandomWord } from './utils'
 import Confetti from 'react-confetti'
 
 export default function App() {
-  const [currentWord, setCurrentWord] = useState(() => getRandomWord())
+  const [currentWord, setCurrentWord] = useState(
+    () => getRandomWord().split('').map(char => ({ value: char, id: crypto.randomUUID() }))
+  )
   const [guessedLetters, setGuessedLetters] = useState([])
 
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
   const wrongGuessCount = guessedLetters.filter(
-    (letter) => !currentWord.includes(letter)
+    (letter) => !currentWord.some(item => item.value === letter)
   ).length
 
   const isGameWon = currentWord
-    .split('')
-    .every((letter) => guessedLetters.includes(letter))
+    .every((item) => guessedLetters.includes(item.value))
 
   const numGuessesLeft = languages.length - 1
 
@@ -27,7 +28,7 @@ export default function App() {
   const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
 
   const isLastGuessIncorrect =
-    lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
+    lastGuessedLetter && !currentWord.some(item => item.value === lastGuessedLetter)
 
   const addGuessedLetter = (letter) => {
     setGuessedLetters((prevLetters) =>
@@ -36,7 +37,7 @@ export default function App() {
   }
 
   const startNewGame = () => {
-    setCurrentWord(getRandomWord())
+    setCurrentWord(getRandomWord().split('').map(char => ({ value: char, id: crypto.randomUUID() })))
     setGuessedLetters([])
   }
 
@@ -57,23 +58,23 @@ export default function App() {
     )
   })
 
-  const letterElements = currentWord.split('').map((letter, index) => {
-    const shouldRevealLetter = isGameLost || guessedLetters.includes(letter)
+  const letterElements = currentWord.map((item) => {
+    const shouldRevealLetter = isGameLost || guessedLetters.includes(item.value)
     const className = clsx(
-      isGameLost && !guessedLetters.includes(letter) && 'missed-letter'
+      isGameLost && !guessedLetters.includes(item.value) && 'missed-letter'
     )
 
     return (
-      <span className={className} key={index}>
-        {shouldRevealLetter ? letter.toUpperCase() : ''}
+      <span className={className} key={item.id}>
+        {shouldRevealLetter ? item.value.toUpperCase() : ''}
       </span>
     )
   })
 
   const keyboardElements = alphabet.split('').map((letter) => {
     const guessedLetter = guessedLetters.includes(letter)
-    const correctLetter = guessedLetter && currentWord.includes(letter)
-    const isWrongLetter = guessedLetter && !currentWord.includes(letter)
+    const correctLetter = guessedLetter && currentWord.some(item => item.value === letter)
+    const isWrongLetter = guessedLetter && !currentWord.some(item => item.value === letter)
     const className = clsx({
       correct: correctLetter,
       wrong: isWrongLetter,
@@ -81,6 +82,7 @@ export default function App() {
 
     return (
       <button
+        type='button'
         className={className}
         onClick={() => addGuessedLetter(letter)}
         key={letter}
@@ -150,7 +152,7 @@ export default function App() {
       {/* Combined visually-hidden aria-live region for status updates */}
       <section className='sr-only' aria-live='polite' role='status'>
         <p>
-          {currentWord.includes(lastGuessedLetter)
+          {currentWord.some(item => item.value === lastGuessedLetter)
             ? `Correct! The letter ${lastGuessedLetter} is in the word.`
             : `Sorry, the letter ${lastGuessedLetter} is not in the word.`}
           You have {numGuessesLeft} attempts left.
@@ -158,9 +160,8 @@ export default function App() {
         <p>
           Current word:{' '}
           {currentWord
-            .split('')
-            .map((letter) =>
-              guessedLetters.includes(letter) ? letter + '.' : 'blank.'
+            .map((item) =>
+              guessedLetters.includes(item.value) ? `${item.value}.` : 'blank.'
             )
             .join(' ')}
         </p>
@@ -169,7 +170,7 @@ export default function App() {
       <section className='keyboard'>{keyboardElements}</section>
 
       {isGameOver && (
-        <button onClick={startNewGame} className='new-game'>
+        <button onClick={startNewGame} className='new-game' type='button'>
           New Game
         </button>
       )}
