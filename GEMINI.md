@@ -12,11 +12,20 @@ A fun, React-based word-guessing game (Hangman-style) where you must save the pr
 
 ## Architecture & Structure
 
-*   `src/App.jsx`: The core component. Manages game state (word, guesses, status), keyboard input, and rendering.
-*   `src/languages.js`: Defines the list of programming languages, their brand colors, and their order of "elimination".
-*   `src/words.js`: A comprehensive list of potential words for the game.
-*   `src/utils.js`: Utility functions for selecting random words and generating "farewell" messages for lost languages.
-*   `src/index.css`: Contains all styling, including layout for the keyboard, language chips, and the word display.
+The project follows a modular component-based architecture to ensure legibility and maintainability.
+
+*   `src/App.jsx`: The Orchestrator. Manages high-level game state and derived logic using `useMemo` and `useCallback`.
+*   `src/components/`:
+    *   `StatusSection.jsx`: Renders win/loss/farewell messages.
+    *   `LanguageChips.jsx`: Renders the programming language lives.
+    *   `WordDisplay.jsx`: Renders the hidden word blanks and revealed letters.
+    *   `Keyboard.jsx`: Renders the interactive alphabet keys.
+    *   `AriaStatus.jsx`: Manages accessible announcements for screen readers.
+*   `src/constants.js`: Holds static values like the alphabet.
+*   `src/languages.js`: Defines the list of programming languages and their styles.
+*   `src/words.js`: The dictionary of potential words.
+*   `src/utils.js`: Helper functions for word generation and text logic.
+*   `src/index.css`: Centralized styles using Flexbox and specific utility classes.
 
 ## Building and Running
 

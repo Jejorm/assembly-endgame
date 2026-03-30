@@ -23,3 +23,9 @@ export function getFarewellText(language) {
 export function getRandomWord() {
   return words[Math.floor(Math.random() * words.length)];
 }
+
+export function generateNewWord() {
+  return getRandomWord()
+    .split('')
+    .map(char => ({ value: char, id: crypto.randomUUID() }));
+}
